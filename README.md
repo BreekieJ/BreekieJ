@@ -1,6 +1,4 @@
-<a href="https://bringon.io/">
-  <img alt="Jesse Breekveldt bouwt aan BringOn. Het vlindereffect in beeld: twee lijnen beginnen bijna gelijk en komen elk ergens anders uit." src="banner.svg" width="100%">
-</a>
+<img alt="Jesse Breekveldt. Het vlindereffect in beeld: twee lijnen beginnen bijna gelijk en komen elk ergens anders uit." src="banner.svg" width="100%">
 
 ### Hoi, ik ben Jesse
 
@@ -20,25 +18,25 @@ Bron: Lorenz, E. N. (1963). Deterministic nonperiodic flow. *Journal of the Atmo
 
 ### Talen
 
-![C#](https://img.shields.io/badge/-C%23-2D1151?logoColor=E4C8FD)
-![TypeScript](https://img.shields.io/badge/-TypeScript-2D1151?logo=typescript&logoColor=E4C8FD)
-![SQL](https://img.shields.io/badge/-SQL-2D1151?logo=postgresql&logoColor=E4C8FD)
-![Python](https://img.shields.io/badge/-Python-2D1151?logo=python&logoColor=E4C8FD)
+![C#](https://img.shields.io/badge/-C%23-0A1430?logoColor=5AA9FF)
+![TypeScript](https://img.shields.io/badge/-TypeScript-0A1430?logo=typescript&logoColor=5AA9FF)
+![SQL](https://img.shields.io/badge/-SQL-0A1430?logo=postgresql&logoColor=5AA9FF)
+![Python](https://img.shields.io/badge/-Python-0A1430?logo=python&logoColor=5AA9FF)
 
 ### Techniek
 
-![.NET](https://img.shields.io/badge/-.NET-2D1151?logo=dotnet&logoColor=E4C8FD)
-![GraphQL](https://img.shields.io/badge/-GraphQL-2D1151?logo=graphql&logoColor=E4C8FD)
-![React](https://img.shields.io/badge/-React-2D1151?logo=react&logoColor=E4C8FD)
-![Vite](https://img.shields.io/badge/-Vite-2D1151?logo=vite&logoColor=E4C8FD)
-![Tailwind CSS](https://img.shields.io/badge/-Tailwind%20CSS-2D1151?logo=tailwindcss&logoColor=E4C8FD)
-![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-2D1151?logo=postgresql&logoColor=E4C8FD)
-![Redis](https://img.shields.io/badge/-Redis-2D1151?logo=redis&logoColor=E4C8FD)
-![RabbitMQ](https://img.shields.io/badge/-RabbitMQ-2D1151?logo=rabbitmq&logoColor=E4C8FD)
-![Docker](https://img.shields.io/badge/-Docker-2D1151?logo=docker&logoColor=E4C8FD)
-![Traefik](https://img.shields.io/badge/-Traefik-2D1151?logo=traefikproxy&logoColor=E4C8FD)
-![Grafana](https://img.shields.io/badge/-Grafana-2D1151?logo=grafana&logoColor=E4C8FD)
-![Stripe](https://img.shields.io/badge/-Stripe-2D1151?logo=stripe&logoColor=E4C8FD)
+![.NET](https://img.shields.io/badge/-.NET-0A1430?logo=dotnet&logoColor=5AA9FF)
+![GraphQL](https://img.shields.io/badge/-GraphQL-0A1430?logo=graphql&logoColor=5AA9FF)
+![React](https://img.shields.io/badge/-React-0A1430?logo=react&logoColor=5AA9FF)
+![Vite](https://img.shields.io/badge/-Vite-0A1430?logo=vite&logoColor=5AA9FF)
+![Tailwind CSS](https://img.shields.io/badge/-Tailwind%20CSS-0A1430?logo=tailwindcss&logoColor=5AA9FF)
+![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-0A1430?logo=postgresql&logoColor=5AA9FF)
+![Redis](https://img.shields.io/badge/-Redis-0A1430?logo=redis&logoColor=5AA9FF)
+![RabbitMQ](https://img.shields.io/badge/-RabbitMQ-0A1430?logo=rabbitmq&logoColor=5AA9FF)
+![Docker](https://img.shields.io/badge/-Docker-0A1430?logo=docker&logoColor=5AA9FF)
+![Traefik](https://img.shields.io/badge/-Traefik-0A1430?logo=traefikproxy&logoColor=5AA9FF)
+![Grafana](https://img.shields.io/badge/-Grafana-0A1430?logo=grafana&logoColor=5AA9FF)
+![Stripe](https://img.shields.io/badge/-Stripe-0A1430?logo=stripe&logoColor=5AA9FF)
 
 ### Product
 
