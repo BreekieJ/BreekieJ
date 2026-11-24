@@ -145,6 +145,8 @@ def banner() -> str:
     # Het moment waarop je het verschil voor het eerst echt ziet.
     splits = next(i for i, d in enumerate(afstand) if d > 0.06 * top)
     sx, sy = grafiek[splits]
+    kx, ky = a[splits]
+    keuze_op = splits / n * TEKEN_DEEL * 100  # het moment van de keuze, in procenten van de looptijd
 
     pad_a, pad_b, pad_g = pad(a), pad(b), pad(grafiek)
     tijd = f"{LOOPTIJD}s linear infinite"
@@ -164,17 +166,22 @@ def banner() -> str:
 .g{{animation:afstand {tijd}}}
 .rand{{paint-order:stroke;stroke:{INK};stroke-width:5px;stroke-linejoin:round}}
 .eind{{animation:eind {tijd}}}
+.keuze{{animation:keuze {tijd}}}
+.start{{letter-spacing:2.5px;fill:{PAPIER}}}
+.puls{{transform-box:fill-box;transform-origin:center;animation:puls 2.6s ease-out infinite}}
+@keyframes puls{{0%{{transform:scale(1);opacity:.9}}80%,100%{{transform:scale(2.6);opacity:0}}}}
 @keyframes eind{{0%,{TEKEN_DEEL * 100 - 3:.0f}%{{opacity:0}}{TEKEN_DEEL * 100 + 1:.0f}%,96%{{opacity:1}}100%{{opacity:0}}}}
 {keyframes("baan-a", lengtes(a))}
 {keyframes("baan-b", lengtes(b))}
 {keyframes("afstand", lengtes(grafiek))}
-@media (prefers-reduced-motion:reduce){{.a,.b,.g,.eind{{animation:none}}}}
+@keyframes keuze{{0%,{keuze_op - 1:.1f}%{{opacity:0}}{keuze_op + 1:.1f}%,96%{{opacity:1}}100%{{opacity:0}}}}
+@media (prefers-reduced-motion:reduce){{.a,.b,.g,.eind,.keuze,.puls{{animation:none}}.puls{{opacity:0}}}}
 """
     bx, by = a[0]
     (ax_, ay_), (bx_, by_) = a[-1], b[-1]
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-labelledby="titel omschrijving">
 <title id="titel">Jesse Breekveldt</title>
-<desc id="omschrijving">Het vlindereffect: twee lijnen beginnen bijna op dezelfde plek en volgen dezelfde regels. Eerst lopen ze gelijk op, daarna komt elk ergens anders uit. Klein verschil, andere uitkomst.</desc>
+<desc id="omschrijving">The butterfly effect: two paths start almost at the same point and follow the same rules. They run together at first, then each ends up somewhere else. Small choices, different outcomes.</desc>
 <defs>
 <style>{stijl}</style>
 <radialGradient id="gloed-links" cx="250" cy="190" r="340" gradientUnits="userSpaceOnUse">
@@ -192,24 +199,28 @@ def banner() -> str:
 
 <path class="lijn a" pathLength="1" d="{pad_a}" stroke="{GOUD}" stroke-width="1.6"/>
 <path class="lijn b" pathLength="1" d="{pad_b}" stroke="{BLAUW_LICHT}" stroke-width="1.6"/>
-<circle cx="{bx:.1f}" cy="{by:.1f}" r="3.5" fill="none" stroke="{GEDEMPT}" stroke-width="1.2"/>
+<circle class="puls" cx="{bx:.1f}" cy="{by:.1f}" r="6" fill="none" stroke="{PAPIER}" stroke-width="1.5"/>
+<circle cx="{bx:.1f}" cy="{by:.1f}" r="8" fill="{INK}" stroke="{PAPIER}" stroke-width="1.8"/>
+<circle cx="{bx:.1f}" cy="{by:.1f}" r="3" fill="{PAPIER}"/>
 <circle class="stip a" r="5" fill="{GOUD}" style="offset-path:path('{pad_a}')"/>
 <circle class="stip b" r="5" fill="{BLAUW_LICHT}" style="offset-path:path('{pad_b}')"/>
 
-<text class="mono rand" x="{bx - 10:.1f}" y="{by + 4:.1f}" text-anchor="end">zelfde begin</text>
-<text class="mono rand eind" x="{ax_ + 11:.1f}" y="{ay_ + 4:.1f}">uitkomst 1</text>
-<text class="mono rand eind" x="{bx_ + 11:.1f}" y="{by_ + 4:.1f}">uitkomst 2</text>
+<text class="mono rand start" x="{bx - 16:.1f}" y="{by + 4:.1f}" text-anchor="end">START</text>
+<g class="keuze"><circle cx="{kx:.1f}" cy="{ky:.1f}" r="7" fill="none" stroke="{PAPIER}" stroke-width="1.8"/>
+<text class="mono rand" x="{kx + 13:.1f}" y="{ky + 4:.1f}" fill="{PAPIER}">choice made</text></g>
+<text class="mono rand eind" x="{ax_ + 11:.1f}" y="{ay_ + 4:.1f}">outcome A</text>
+<text class="mono rand eind" x="{bx_ + 11:.1f}" y="{by_ + 4:.1f}">outcome B</text>
 
 <text class="kop" x="{X0}" y="128" font-size="68">Jesse Breekveldt</text>
-<text class="sub" x="{X0 + 2}" y="170" font-size="25">Klein verschil, andere uitkomst</text>
+<text class="sub" x="{X0 + 2}" y="170" font-size="25">Small choices, different outcomes</text>
 
 <line x1="{X0}" y1="{Y_LAAG}" x2="{X1}" y2="{Y_LAAG}" stroke="{GEDEMPT}" stroke-opacity=".35" stroke-width="1"/>
 <line x1="{sx:.1f}" y1="{Y_LAAG}" x2="{sx:.1f}" y2="{Y_HOOG + 6}" stroke="{GEDEMPT}" stroke-opacity=".5" stroke-width="1" stroke-dasharray="2 5"/>
 <path class="lijn g" pathLength="1" d="{pad_g}" stroke="{IJS}" stroke-width="2.2"/>
 <circle class="stip g" r="5" fill="{IJS}" style="offset-path:path('{pad_g}')"/>
-<text class="mono" x="{X0}" y="{Y_LAAG - 18}">verschil aan het begin: 0,001</text>
-<text class="mono zacht" x="{sx - 10:.1f}" y="{Y_HOOG + 16}" text-anchor="end">hier gaan ze uit elkaar</text>
-<text class="mono zacht" x="{X0}" y="{Y_LAAG + 22}">afstand tussen de twee lijnen</text>
+<text class="mono" x="{X0}" y="{Y_LAAG - 18}">difference at the start: 0.001</text>
+<text class="mono" x="{sx - 10:.1f}" y="{Y_HOOG + 16}" text-anchor="end">choice made</text>
+<text class="mono zacht" x="{X0}" y="{Y_LAAG + 22}">distance between the two paths</text>
 <text class="mono motto" x="{X1}" y="{H - 18}" text-anchor="end">LORENZ, 1963</text>
 </g>
 </svg>
