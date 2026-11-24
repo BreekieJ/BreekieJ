@@ -1,4 +1,4 @@
-<img alt="Jesse Breekveldt. Het vlindereffect in beeld: twee lijnen beginnen bijna gelijk en komen elk ergens anders uit." src="banner.svg" width="100%">
+<img alt="Jesse Breekveldt. Het vlindereffect in beeld: twee lijnen beginnen bijna gelijk en komen elk ergens anders uit." src="banner.svg?v=3" width="100%">
 
 ### Hoi, ik ben Jesse
 
