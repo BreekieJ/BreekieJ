@@ -15,7 +15,6 @@ from __future__ import annotations
 
 import base64
 import math
-import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -23,13 +22,14 @@ ASSETS = ROOT / "assets"
 
 W, H = 1280, 384
 
-# BringOn-kleuren
-INK = "#1A0A38"
-PAARS = "#9A37F4"
-PAARS_LICHT = "#B870FF"
-LAVENDEL = "#E4C8FD"
-PAPIER = "#FAF4FF"
-GEDEMPT = "#8F7BB0"
+# Kleuren: nachtblauw met helder blauw en goud
+INK = "#0A1430"
+BLAUW = "#2F6BFF"
+BLAUW_LICHT = "#5AA9FF"
+GOUD = "#F6B91E"
+IJS = "#C9DDFF"
+PAPIER = "#F2F7FF"
+GEDEMPT = "#7D90B8"
 
 # Lorenz (1963)
 SIGMA, RHO, BETA = 10.0, 28.0, 8.0 / 3.0
@@ -127,18 +127,6 @@ def font_face(naam: str, bestand: str, gewicht: int) -> str:
     )
 
 
-def echo() -> str:
-    """Echo, de mascotte van BringOn, ongewijzigd ingevoegd."""
-    svg = (ASSETS / "echo-waving.svg").read_text()
-    binnen = re.search(r"<svg[^>]*>(.*)</svg>", svg, re.S).group(1)
-    hoogte = 178
-    breedte = hoogte * 692.1 / 845
-    return (
-        f'<svg x="{W - breedte - 44:.0f}" y="30" width="{breedte:.0f}" height="{hoogte}" '
-        f'viewBox="0 0 692.1 845">{binnen}</svg>'
-    )
-
-
 def banner() -> str:
     a3, b3 = twee_banen()
     dun = 4  # elk vierde punt is genoeg voor een vloeiende lijn
@@ -165,8 +153,8 @@ def banner() -> str:
 {font_face("Space Grotesk", "SpaceGrotesk-latin.woff2", 600)}
 {font_face("DM Mono", "DMMono-latin.woff2", 400)}
 .kop{{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:600;fill:#fff;letter-spacing:-1.5px}}
-.sub{{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:600;fill:{LAVENDEL}}}
-.mono{{font-family:'DM Mono',ui-monospace,monospace;font-size:12.5px;fill:{LAVENDEL}}}
+.sub{{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:600;fill:{IJS}}}
+.mono{{font-family:'DM Mono',ui-monospace,monospace;font-size:12.5px;fill:{IJS}}}
 .zacht{{fill:{GEDEMPT}}}
 .motto{{font-size:12px;letter-spacing:3.5px;fill:{GEDEMPT}}}
 .lijn{{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0}}
@@ -185,15 +173,15 @@ def banner() -> str:
     bx, by = a[0]
     (ax_, ay_), (bx_, by_) = a[-1], b[-1]
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-labelledby="titel omschrijving">
-<title id="titel">Jesse Breekveldt bouwt aan BringOn</title>
+<title id="titel">Jesse Breekveldt</title>
 <desc id="omschrijving">Het vlindereffect: twee lijnen beginnen bijna op dezelfde plek en volgen dezelfde regels. Eerst lopen ze gelijk op, daarna komt elk ergens anders uit. Klein verschil, andere uitkomst.</desc>
 <defs>
 <style>{stijl}</style>
 <radialGradient id="gloed-links" cx="250" cy="190" r="340" gradientUnits="userSpaceOnUse">
-<stop offset="0" stop-color="{PAARS}" stop-opacity=".34"/><stop offset="1" stop-color="{PAARS}" stop-opacity="0"/>
+<stop offset="0" stop-color="{BLAUW}" stop-opacity=".34"/><stop offset="1" stop-color="{BLAUW}" stop-opacity="0"/>
 </radialGradient>
 <radialGradient id="gloed-rechts" cx="{W - 110}" cy="110" r="360" gradientUnits="userSpaceOnUse">
-<stop offset="0" stop-color="{PAARS}" stop-opacity=".30"/><stop offset="1" stop-color="{PAARS}" stop-opacity="0"/>
+<stop offset="0" stop-color="{BLAUW}" stop-opacity=".30"/><stop offset="1" stop-color="{BLAUW}" stop-opacity="0"/>
 </radialGradient>
 <clipPath id="kader"><rect width="{W}" height="{H}" rx="20"/></clipPath>
 </defs>
@@ -202,28 +190,27 @@ def banner() -> str:
 <rect width="{W}" height="{H}" fill="url(#gloed-links)"/>
 <rect width="{W}" height="{H}" fill="url(#gloed-rechts)"/>
 
-<path class="lijn a" pathLength="1" d="{pad_a}" stroke="{PAPIER}" stroke-width="1.6" stroke-opacity=".85"/>
-<path class="lijn b" pathLength="1" d="{pad_b}" stroke="{PAARS_LICHT}" stroke-width="1.6"/>
+<path class="lijn a" pathLength="1" d="{pad_a}" stroke="{GOUD}" stroke-width="1.6"/>
+<path class="lijn b" pathLength="1" d="{pad_b}" stroke="{BLAUW_LICHT}" stroke-width="1.6"/>
 <circle cx="{bx:.1f}" cy="{by:.1f}" r="3.5" fill="none" stroke="{GEDEMPT}" stroke-width="1.2"/>
-<circle class="stip a" r="5" fill="{PAPIER}" style="offset-path:path('{pad_a}')"/>
-<circle class="stip b" r="5" fill="{PAARS_LICHT}" style="offset-path:path('{pad_b}')"/>
+<circle class="stip a" r="5" fill="{GOUD}" style="offset-path:path('{pad_a}')"/>
+<circle class="stip b" r="5" fill="{BLAUW_LICHT}" style="offset-path:path('{pad_b}')"/>
 
 <text class="mono rand" x="{bx - 10:.1f}" y="{by + 4:.1f}" text-anchor="end">zelfde begin</text>
 <text class="mono rand eind" x="{ax_ + 11:.1f}" y="{ay_ + 4:.1f}">uitkomst 1</text>
 <text class="mono rand eind" x="{bx_ + 11:.1f}" y="{by_ + 4:.1f}">uitkomst 2</text>
 
 <text class="kop" x="{X0}" y="128" font-size="68">Jesse Breekveldt</text>
-<text class="sub" x="{X0 + 2}" y="170" font-size="25">Bouwt aan BringOn</text>
-{echo()}
+<text class="sub" x="{X0 + 2}" y="170" font-size="25">Klein verschil, andere uitkomst</text>
 
 <line x1="{X0}" y1="{Y_LAAG}" x2="{X1}" y2="{Y_LAAG}" stroke="{GEDEMPT}" stroke-opacity=".35" stroke-width="1"/>
 <line x1="{sx:.1f}" y1="{Y_LAAG}" x2="{sx:.1f}" y2="{Y_HOOG + 6}" stroke="{GEDEMPT}" stroke-opacity=".5" stroke-width="1" stroke-dasharray="2 5"/>
-<path class="lijn g" pathLength="1" d="{pad_g}" stroke="{LAVENDEL}" stroke-width="2.2"/>
-<circle class="stip g" r="5" fill="{LAVENDEL}" style="offset-path:path('{pad_g}')"/>
+<path class="lijn g" pathLength="1" d="{pad_g}" stroke="{IJS}" stroke-width="2.2"/>
+<circle class="stip g" r="5" fill="{IJS}" style="offset-path:path('{pad_g}')"/>
 <text class="mono" x="{X0}" y="{Y_LAAG - 18}">verschil aan het begin: 0,001</text>
 <text class="mono zacht" x="{sx - 10:.1f}" y="{Y_HOOG + 16}" text-anchor="end">hier gaan ze uit elkaar</text>
 <text class="mono zacht" x="{X0}" y="{Y_LAAG + 22}">afstand tussen de twee lijnen</text>
-<text class="mono motto" x="{X1}" y="{H - 18}" text-anchor="end">KLEIN VERSCHIL, ANDERE UITKOMST</text>
+<text class="mono motto" x="{X1}" y="{H - 18}" text-anchor="end">LORENZ, 1963</text>
 </g>
 </svg>
 """
