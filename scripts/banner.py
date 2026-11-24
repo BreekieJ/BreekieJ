@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tekent banner.svg: het vlindereffect in één beeld.
+"""Tekent vlindereffect.svg: het vlindereffect in één beeld.
 
 Twee lijnen volgen dezelfde regels (de vergelijkingen van Lorenz, 1963) en
 beginnen bijna op dezelfde plek: het verschil is één duizendste. Eerst lopen ze
@@ -217,6 +217,6 @@ def banner() -> str:
 
 
 if __name__ == "__main__":
-    doel = ROOT / "banner.svg"
+    doel = ROOT / "vlindereffect.svg"
     doel.write_text(banner())
     print(f"{doel.relative_to(ROOT)} geschreven ({doel.stat().st_size / 1024:.0f} kB)")
